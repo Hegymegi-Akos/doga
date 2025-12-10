@@ -13,6 +13,9 @@ function Navigation() {
             <li className="nav-item">
               <Link className="nav-link" to="/add">Új termék</Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/cart">Kosár</Link>
+            </li>
           </ul>
         </div>
       </div>

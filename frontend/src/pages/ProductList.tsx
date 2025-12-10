@@ -23,6 +23,19 @@ function ProductList() {
     fetchProducts();
   }, []);
 
+  const handleAddToCart = async (productId: number) => {
+    try {
+      await axios.post('/api/cart', {
+        productId: productId,
+        quantity: 1
+      });
+      alert('A termék a kosárba került!');
+    } catch (err) {
+      alert('Hiba történt a termék kosárba helyezése közben.');
+      console.error(err);
+    }
+  };
+
   if (loading) return <p>Betöltés...</p>;
   if (error) return <p className="text-danger">{error}</p>;
 
@@ -35,6 +48,7 @@ function ProductList() {
             <th>ID</th>
             <th>Név</th>
             <th>Ár</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +57,14 @@ function ProductList() {
               <td>{product.id}</td>
               <td>{product.name}</td>
               <td>{product.price}</td>
+              <td>
+                <button 
+                  className="btn btn-primary btn-sm"
+                  onClick={() => handleAddToCart(product.id)}
+                >
+                  Kosárba
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
